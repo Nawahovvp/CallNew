@@ -177,7 +177,7 @@
         </div>
       );
     };
-    const UserPopup = ({ isOpen, onClose, user }) => {
+    const UserPopup = ({ isOpen, onClose, user, handleLogout }) => {
       if (!isOpen || !user) return null;
       return (
         <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -194,6 +194,14 @@
               <p><strong>ชื่อ:</strong> {user.Name}</p>
               <p><strong>ตำแหน่ง:</strong> {user['ตำแหน่ง']}</p>
               <p><strong>หน่วยงาน:</strong> {user['หน่วยงาน']}</p>
+            </div>
+            <div class="mt-6">
+              <button
+                onClick={handleLogout}
+                class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
@@ -1198,12 +1206,6 @@ const summaryData = [...new Set(data.map(item => item['Mountyear']))]
         <ErrorBoundary>
           <div class="relative bg-white rounded-lg shadow-lg p-6">
             <button
-              onClick={handleLogout}
-              class="absolute top-4 right-32 bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 no-print"
-            >
-              Logout
-            </button>
-            <button
               onClick={handleHamburgerClick}
               class="absolute top-4 right-4 text-2xl font-bold text-blue-800 no-print"
             >
@@ -1600,6 +1602,7 @@ const summaryData = [...new Set(data.map(item => item['Mountyear']))]
               isOpen={showUserPopup}
               onClose={handleCloseUserPopup}
               user={currentUser}
+              handleLogout={handleLogout}
             />
           </div>
         </ErrorBoundary>
